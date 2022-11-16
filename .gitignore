@@ -1,2 +1,5 @@
 .env
+rclone/rclone.conf
 *.swp
+*/.terraform/**
+*.tfstate*
