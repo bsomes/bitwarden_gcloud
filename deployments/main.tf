@@ -84,6 +84,18 @@ resource "google_compute_instance" "vm" {
     }
 
     provisioner "file" {
+      source = pathexpand("../countryblock")
+      destination = "/home/${var.user}/countryblock"
+
+      connection {
+        type = "ssh"
+        user = var.user
+        host = self.network_interface.0.access_config.0.nat_ip
+        private_key = file("~/.ssh/vaultwarden_instance") 
+      }
+    }
+
+    provisioner "file" {
       source = pathexpand("../fail2ban")
       destination = "/home/${var.user}/fail2ban"
 
@@ -111,6 +123,40 @@ resource "google_compute_instance" "vm" {
       source = pathexpand("../docker-compose.yml")
       destination = "/home/${var.user}/docker-compose.yml"
 
+      connection {
+        type = "ssh"
+        user = var.user
+        host = self.network_interface.0.access_config.0.nat_ip
+        private_key = file("~/.ssh/vaultwarden_instance")
+      }
+    }
+
+    provisioner "file" {
+      source = pathexpand("../ddns")
+      destination = "/home/${var.user}/ddns"
+
+      connection {
+        type = "ssh"
+        user = var.user
+        host = self.network_interface.0.access_config.0.nat_ip
+        private_key = file("~/.ssh/vaultwarden_instance")
+      }
+    }
+
+    provisioner "file" {
+      source = pathexpand("../rclone")
+      destination = "/home/${var.user}/rclone"
+
+      connection {
+        type = "ssh"
+        user = var.user
+        host = self.network_interface.0.access_config.0.nat_ip
+        private_key = file("~/.ssh/vaultwarden_instance")
+      }
+    }
+
+    provisioner "remote-exec" {
+      inline = ["sh", "/home/${var.user}/utilities/install-alias.sh"]
       connection {
         type = "ssh"
         user = var.user

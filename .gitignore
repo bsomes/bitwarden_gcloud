@@ -3,3 +3,4 @@ rclone/rclone.conf
 *.swp
 */.terraform/**
 *.tfstate*
+*.tar.gz

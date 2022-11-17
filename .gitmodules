@@ -1,0 +1,3 @@
+[submodule "caddy/ruleset/coreruleset"]
+	path = caddy/ruleset/coreruleset
+	url = https://github.com/coreruleset/coreruleset.git
