@@ -191,10 +191,3 @@ resource "google_compute_firewall" "firewall_rules" {
   source_ranges = ["0.0.0.0"]
   target_tags = ["http-server"]
 }
-
-
-resource "google_storage_bucket" "backup_bucket" {
-  name = "db-backups"
-  location = "US"
-  project = data.google_project.project.id
-}

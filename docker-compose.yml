@@ -14,6 +14,7 @@ services:
     volumes:
     - ${PWD}/bitwarden:/data
     - ${PWD}/utilities/backup.sh:/backup.sh:ro
+    - ${PWD}/rclone:/data
     environment:
     - LOG_FILE=/data/bitwarden.log
     - WEBSOCKET_ENABLED=true            # required for websockets
@@ -56,7 +57,7 @@ services:
   proxy:
     # Caddy provides an automatic HTTPS reverse proxy with Let's Encrypt cert provisioning
     # https://caddyserver.com/
-    image: caddy/caddy:alpine
+    image: bsomes92/caddy-coraza:latest
     restart: always
     container_name: proxy
     volumes:
